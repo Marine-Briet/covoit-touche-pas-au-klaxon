@@ -1,0 +1,13 @@
+{
+    "name": "marine-briet/covoit-touche-pas-au-klaxon",
+    "description": "Intranet application to promote carpooling between company sites",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        }
+    },
+    "require": {}
+}
