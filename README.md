@@ -20,10 +20,10 @@ The company operates multiple sites and generates numerous inter-site trips. To 
 │   ├── Controllers/
 │   └── Models/
 ├── core/
-├── templates/
+├── template/
 ├── public/
+│   └── assets/
 ├── config/
-├── vendor/
 └── composer.json
 
 ## Installation
