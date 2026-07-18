@@ -1,0 +1,26 @@
+{
+  "name": "Touche_pas_au_klaxon",
+  "version": "1.0.0",
+  "description": "Fictional project developed as part of a Full Stack Developer training program.",
+  "homepage": "https://github.com/Marine-Briet/covoit-touche-pas-au-flaxon#readme",
+  "bugs": {
+    "url": "https://github.com/Marine-Briet/covoit-touche-pas-au-flaxon/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marine-Briet/covoit-touche-pas-au-flaxon.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "sass scss/main.scss public/assets/css/style.css",
+    "watch:css": "sass scss/main.scss public/assets/css/style.css --watch"
+  },
+  "devDependencies": {
+    "bootstrap": "^5.3.8",
+    "sass": "^1.101.0"
+  }
+}
