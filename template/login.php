@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Connexion - Touche pas au klaxon</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
 
                 <?php require __DIR__ . '/partials/flash.php'; ?>
 
-                <form method="POST" action="login">
+                <form method="POST" action="<?= BASE_URL ?>/login">
                     <div class="mb-3">
                         <label for="email" class="form-label">Adresse email</label>
                         <input type="email" class="form-control" id="email" name="email" required>

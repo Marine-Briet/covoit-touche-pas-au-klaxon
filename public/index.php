@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Buki\Router\Router;
 use App\Controllers\HomeController;
 use App\Controllers\AuthController;
+use App\Controllers\TrajetController;
 
 $router = new \Buki\Router\Router([
     'base_folder' => str_replace('\\', '/', __DIR__),
@@ -33,6 +34,16 @@ $router->post('/login', function(Request $request, Response $response) {
 $router->get('/logout', function(Request $request, Response $response) {
     $controller = new AuthController();
     return $controller->logout($request, $response);
+});
+
+$router->get('/trajet/create', function(Request $request, Response $response) {
+    $controller = new TrajetController();
+    return $controller->showCreateForm($request, $response);
+});
+
+$router->post('/trajet/create', function(Request $request, Response $response) {
+    $controller = new TrajetController();
+    return $controller->create($request, $response);
 });
 
 $router->run();
