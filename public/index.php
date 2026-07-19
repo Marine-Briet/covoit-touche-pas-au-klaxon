@@ -46,4 +46,19 @@ $router->post('/trajet/create', function(Request $request, Response $response) {
     return $controller->create($request, $response);
 });
 
+$router->get('/trajet/edit/:id', function(Request $request, Response $response, $id) {
+    $controller = new TrajetController();
+    return $controller->showEditForm($request, $response, $id);
+});
+
+$router->post('/trajet/edit/:id', function(Request $request, Response $response, $id) {
+    $controller = new TrajetController();
+    return $controller->edit($request, $response, $id);
+});
+
+$router->post('/trajet/delete/:id', function(Request $request, Response $response, $id) {
+    $controller = new TrajetController();
+    return $controller->delete($request, $response, $id);
+});
+
 $router->run();
