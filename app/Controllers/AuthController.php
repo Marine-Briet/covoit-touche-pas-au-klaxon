@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\UtilisateurModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Core\Flash;
 
 
 class AuthController
@@ -51,8 +52,7 @@ class AuthController
         }
 
         // Échec : un message d'erreur
-        $_SESSION['flash_error'] = 'Email ou mot de passe incorrect.';
-
+        Flash::set('error', 'Email ou mot de passe incorrect.');
         $response->setStatusCode(302);
         $response->headers->set('Location', BASE_URL . '/login');
         return $response;
@@ -66,7 +66,7 @@ class AuthController
         unset($_SESSION['user']);
 
         $response->setStatusCode(302);
-        $response->headers->set('Location', BASE_URL . '/login');
+        $response->headers->set('Location', BASE_URL . '/');
         return $response;
     }
 }

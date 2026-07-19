@@ -18,12 +18,7 @@
 
                 <h2 class="h5 mb-3">Connexion</h2>
 
-                <?php if (!empty($_SESSION['flash_error'])): ?>
-                    <div class="alert alert-danger">
-                        <?= htmlspecialchars($_SESSION['flash_error']) ?>
-                    </div>
-                    <?php unset($_SESSION['flash_error']); ?>
-                <?php endif; ?>
+                <?php require __DIR__ . '/partials/flash.php'; ?>
 
                 <form method="POST" action="login">
                     <div class="mb-3">

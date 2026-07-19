@@ -16,6 +16,7 @@
     <div class="container mt-4">
 
         <?php require __DIR__ . '/partials/header.php'; ?>
+        <?php require __DIR__ . '/partials/flash.php'; ?>
 
         <h2 class="h5 mb-3">Pour obtenir plus d'informations sur un trajet, veuillez vous connecter</h2>
 
