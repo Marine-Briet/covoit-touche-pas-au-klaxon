@@ -44,7 +44,7 @@ INSERT INTO AGENCE (nom_ville) VALUES
 SELECT id_agence, nom_ville FROM AGENCE;
 
 
-//IMPORTANT : id_agence_depart ≠ id_agence_arrivee ; date_arrivee > date_depart ; 0 ≤ nb_places_dispo < nb_places_tot
+-- IMPORTANT : id_agence_depart ≠ id_agence_arrivee ; date_arrivee > date_depart ; 0 ≤ nb_places_dispo < nb_places_tot
 
 
 INSERT INTO TRAJET (date_depart, date_arrivee, nb_places_tot, nb_places_dispo, id_utilisateur, id_agence_depart, id_agence_arrivee) VALUES

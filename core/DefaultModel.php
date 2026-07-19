@@ -9,6 +9,7 @@ abstract class DefaultModel
 {
     protected PDO $pdo;
     protected string $table;
+    protected string $primaryKey = 'id';
 
     public function __construct()
     {
@@ -23,17 +24,17 @@ abstract class DefaultModel
         return $stmt->fetchAll();
     }
 
-    //Récupère un enregistrement par son ID
+    // Récupère un enregistrement par son ID
     public function findById(int $id): ?array
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE id = :id");
+        $stmt = $this->pdo->prepare("SELECT * FROM {$this->table} WHERE {$this->primaryKey} = :id");
         $stmt->execute(['id' => $id]);
         $result = $stmt->fetch();
 
         return $result ?: null;
     }
 
-    //Insère un nouvel enregistrement
+    // Insère un nouvel enregistrement
     public function insert(array $data): bool
     {
         $columns = implode(', ', array_keys($data));
@@ -54,8 +55,8 @@ abstract class DefaultModel
         }
         $fieldsStr = implode(', ', $fields);
 
-        $sql = "UPDATE {$this->table} SET {$fieldsStr} WHERE id = :id";
-        $data['id'] = $id; // on ajoute l'id aux paramètres liés
+        $sql = "UPDATE {$this->table} SET {$fieldsStr} WHERE {$this->primaryKey} = :pk";
+        $data['pk'] = $id;
 
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute($data);
@@ -64,7 +65,7 @@ abstract class DefaultModel
     // Supprime un enregistrement par son ID.
     public function delete(int $id): bool
     {
-        $stmt = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = :id");
+        $stmt = $this->pdo->prepare("DELETE FROM {$this->table} WHERE {$this->primaryKey} = :id");
         return $stmt->execute(['id' => $id]);
     }
 }
