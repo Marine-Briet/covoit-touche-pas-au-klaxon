@@ -2,21 +2,35 @@
 
 namespace Core;
 
-// Gestion centralisée des messages flash (succès, erreur, etc.)
+/**
+* Classe Flash fournit des méthodes statiques pour gérer les messages flash.
+*
+* @package Core
+*/
+
 
 class Flash
 {
+    /**
+    * Enregistre un message flash d'un certain type.
+    *
+    * @param string $type Le type du message flash
+    * @param string $message Le message flash
+    * @return void
+    */
 
-    // Enregistre un message flash d'un certain type
-    
     public static function set(string $type, string $message): void
     {
         $_SESSION['flash'][$type] = $message;
     }
 
     
-    // Récupère un message flash (et le supprime immédiatement après lecture)
-    
+    /**
+    * Récupère un message flash d'un certain type et le supprime de la session.
+    * @param string $type Le type du message flash à récupérer
+    * @return string|null Le message flash ou null s'il n'existe pas
+    */
+
     public static function get(string $type): ?string
     {
         if (!empty($_SESSION['flash'][$type])) {

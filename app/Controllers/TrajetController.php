@@ -10,14 +10,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use DateTime;
 
-
-// Contrôleur de gestion des trajets (côté utilisateur)
-
+/**
+ * Contrôleur de gestion des trajets (côté utilisateur connecté).
+ * Gère la création, la modification et la suppression des trajets,
+ * avec vérification systématique que l'utilisateur est bien l'auteur.
+ *
+ * @package App\Controllers
+ */
 class TrajetController
 {
-    
-     // Affiche le formulaire de création (GET /trajet/create)
-     
+    /**
+     * Affiche le formulaire de création d'un trajet (GET /trajet/create).
+     *
+     * @param Request $request La requête HTTP entrante
+     * @param Response $response La réponse HTTP à compléter
+     * @return Response Le formulaire de création, ou une redirection si non connecté
+     */
     public function showCreateForm(Request $request, Response $response)
     {
         $redirect = Auth::requireLogin($response);
@@ -36,10 +44,15 @@ class TrajetController
         return $response;
     }
 
-    
-    // Traite la création (POST /trajet/create)
-
-
+    /**
+     * Traite la création d'un trajet (POST /trajet/create).
+     * Vérifie la cohérence des données (agences différentes, date d'arrivée
+     * postérieure à la date de départ) avant l'insertion en base.
+     *
+     * @param Request $request La requête HTTP contenant les données du formulaire
+     * @param Response $response La réponse HTTP à compléter (redirection)
+     * @return Response Redirection vers l'accueil (succès) ou le formulaire (erreur)
+     */
     public function create(Request $request, Response $response)
     {
         $redirect = Auth::requireLogin($response);
@@ -67,7 +80,7 @@ class TrajetController
             Flash::set('error', 'La date d\'arrivée doit être postérieure à la date de départ.');
             $response->setStatusCode(302);
             $response->headers->set('Location', BASE_URL . '/trajet/create');
-         return $response;
+            return $response;
         }
 
         $trajetModel = new TrajetModel();
@@ -86,8 +99,15 @@ class TrajetController
         $response->headers->set('Location', BASE_URL . '/');
         return $response;
     }
+
     /**
-     * Affiche le formulaire de modification (GET /trajet/edit/{id})
+     * Affiche le formulaire de modification d'un trajet (GET /trajet/edit/{id}).
+     * Vérifie que l'utilisateur connecté est bien l'auteur du trajet.
+     *
+     * @param Request $request La requête HTTP entrante
+     * @param Response $response La réponse HTTP à compléter
+     * @param int|string $id Identifiant du trajet à modifier
+     * @return Response Le formulaire de modification, ou une redirection si non autorisé
      */
     public function showEditForm(Request $request, Response $response, $id)
     {
@@ -118,7 +138,14 @@ class TrajetController
     }
 
     /**
-     * Traite la modification (POST /trajet/edit/{id})
+     * Traite la modification d'un trajet (POST /trajet/edit/{id}).
+     * Vérifie l'auteur, la cohérence des données, et recalcule le nombre
+     * de places disponibles en conservant les places déjà réservées.
+     *
+     * @param Request $request La requête HTTP contenant les données du formulaire
+     * @param Response $response La réponse HTTP à compléter (redirection)
+     * @param int|string $id Identifiant du trajet à modifier
+     * @return Response Redirection vers l'accueil (succès) ou le formulaire (erreur)
      */
     public function edit(Request $request, Response $response, $id)
     {
@@ -180,6 +207,15 @@ class TrajetController
         return $response;
     }
 
+    /**
+     * Supprime un trajet (POST /trajet/delete/{id}).
+     * Vérifie que l'utilisateur connecté est bien l'auteur du trajet.
+     *
+     * @param Request $request La requête HTTP entrante
+     * @param Response $response La réponse HTTP à compléter (redirection)
+     * @param int|string $id Identifiant du trajet à supprimer
+     * @return Response Redirection vers l'accueil, avec message flash de succès ou d'erreur
+     */
     public function delete(Request $request, Response $response, $id)
     {
         $redirect = Auth::requireLogin($response);

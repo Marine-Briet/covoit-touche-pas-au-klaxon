@@ -8,8 +8,22 @@ use Core\Flash;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Contrôleur de gestion des trajets côté administrateur.
+ * L'administrateur a accès à la liste complète des trajets et peut
+ * en supprimer, sans restriction d'auteur (contrairement à TrajetController).
+ *
+ * @package App\Controllers
+ */
 class AdminTrajetController
 {
+    /**
+     * Affiche la liste complète de tous les trajets (GET /admin/trajets).
+     *
+     * @param Request $request La requête HTTP entrante
+     * @param Response $response La réponse HTTP à compléter
+     * @return Response La liste des trajets, ou une redirection si non autorisé
+     */
     public function index(Request $request, Response $response)
     {
         $redirect = Auth::requireAdmin($response);
@@ -28,6 +42,14 @@ class AdminTrajetController
         return $response;
     }
 
+    /**
+     * Supprime un trajet, quel qu'en soit l'auteur (POST /admin/trajet/delete/{id}).
+     *
+     * @param Request $request La requête HTTP entrante
+     * @param Response $response La réponse HTTP à compléter (redirection)
+     * @param int|string $id Identifiant du trajet à supprimer
+     * @return Response Redirection vers la liste des trajets
+     */
     public function delete(Request $request, Response $response, $id)
     {
         $redirect = Auth::requireAdmin($response);
