@@ -60,4 +60,21 @@ class TrajetModel extends DefaultModel {
 
         return $result ?: null;
     }
+
+    public function findAllWithDetails(): array
+    {
+    $sql = "SELECT 
+                t.*,
+                dep.nom_ville AS ville_depart,
+                arr.nom_ville AS ville_arrivee,
+                u.nom, u.prenom
+            FROM trajet t
+            INNER JOIN agence dep ON t.id_agence_depart = dep.id_agence
+            INNER JOIN agence arr ON t.id_agence_arrivee = arr.id_agence
+            INNER JOIN utilisateur u ON t.id_utilisateur = u.id_utilisateur
+            ORDER BY t.date_depart DESC";
+
+    $stmt = $this->pdo->query($sql);
+    return $stmt->fetchAll();
+    }
 }

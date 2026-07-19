@@ -46,4 +46,21 @@ class Auth
 
         return null;
     }
+
+    public static function requireAdmin(Response $response): ?Response
+    {
+    if (!self::check()) {
+        $response->setStatusCode(302);
+        $response->headers->set('Location', BASE_URL . '/login');
+        return $response;
+    }
+
+    if (!self::isAdmin()) {
+        $response->setStatusCode(302);
+        $response->headers->set('Location', BASE_URL . '/');
+        return $response;
+    }
+
+    return null;
+    }
 }
