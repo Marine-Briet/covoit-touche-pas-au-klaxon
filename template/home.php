@@ -1,4 +1,8 @@
 <?php
+/**
+ * Vue : Page d'accueil
+ * Variable attendue : $trajets
+ */
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -11,11 +15,7 @@
 
     <div class="container mt-4">
 
-        <!-- Header (sera extrait dans un fichier séparé plus tard) -->
-        <div class="d-flex justify-content-between align-items-center border rounded p-3 mb-4">
-            <h1 class="h4 mb-0">Touche pas au klaxon</h1>
-            <a href="/login" class="btn btn-dark">Connexion</a>
-        </div>
+        <?php require __DIR__ . '/partials/header.php'; ?>
 
         <h2 class="h5 mb-3">Pour obtenir plus d'informations sur un trajet, veuillez vous connecter</h2>
 
@@ -58,9 +58,7 @@
 
     </div>
 
-    <footer class="text-center mt-5 text-muted">
-        © 2024 - CENEF - MVC PHP
-    </footer>
+    <?php require __DIR__ . '/partials/footer.php'; ?>
 
 </body>
 </html>
