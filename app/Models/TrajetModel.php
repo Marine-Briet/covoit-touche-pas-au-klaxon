@@ -4,12 +4,24 @@ namespace App\Models;
 
 use Core\DefaultModel;
 
-
-class TrajetModel extends DefaultModel {
+/**
+ * Modèle représentant un trajet (covoiturage inter-sites).
+ * Hérite des méthodes CRUD génériques de DefaultModel et ajoute des
+ * requêtes spécifiques avec jointures (agences, utilisateur auteur).
+ *
+ * @package App\Models
+ */
+class TrajetModel extends DefaultModel
+{
     protected string $table = 'trajet';
     protected string $primaryKey = 'id_trajet';
 
-    // Récupère tous les trajets à venir avec places disponibles, triés par date de départ croissante.
+    /**
+     * Récupère tous les trajets à venir avec places disponibles,
+     * triés par date de départ croissante (utilisé pour la page d'accueil).
+     *
+     * @return array<int, array<string, mixed>> Liste des trajets disponibles avec infos jointes (agences, auteur)
+     */
     public function findAllAvailable(): array
     {
         $sql = "SELECT 
@@ -37,7 +49,13 @@ class TrajetModel extends DefaultModel {
         return $stmt->fetchAll();
     }
 
-    // Récupère un trajet précis avec toutes les infos jointes (pour la modale de détails et le formulaire de modification).
+    /**
+     * Récupère un trajet précis avec toutes les infos jointes
+     * (utilisé pour la modale de détails et le formulaire de modification).
+     *
+     * @param int $id Identifiant du trajet recherché
+     * @return array<string, mixed>|null Les données complètes du trajet, ou null si non trouvé
+     */
     public function findByIdWithDetails(int $id): ?array
     {
         $sql = "SELECT 
@@ -61,20 +79,26 @@ class TrajetModel extends DefaultModel {
         return $result ?: null;
     }
 
+    /**
+     * Récupère tous les trajets (passés et futurs, disponibles ou non) avec infos jointes.
+     * Utilisé pour la liste complète côté tableau de bord administrateur.
+     *
+     * @return array<int, array<string, mixed>> Liste complète des trajets avec infos jointes (agences, auteur)
+     */
     public function findAllWithDetails(): array
     {
-    $sql = "SELECT 
-                t.*,
-                dep.nom_ville AS ville_depart,
-                arr.nom_ville AS ville_arrivee,
-                u.nom, u.prenom
-            FROM trajet t
-            INNER JOIN agence dep ON t.id_agence_depart = dep.id_agence
-            INNER JOIN agence arr ON t.id_agence_arrivee = arr.id_agence
-            INNER JOIN utilisateur u ON t.id_utilisateur = u.id_utilisateur
-            ORDER BY t.date_depart DESC";
+        $sql = "SELECT 
+                    t.*,
+                    dep.nom_ville AS ville_depart,
+                    arr.nom_ville AS ville_arrivee,
+                    u.nom, u.prenom
+                FROM trajet t
+                INNER JOIN agence dep ON t.id_agence_depart = dep.id_agence
+                INNER JOIN agence arr ON t.id_agence_arrivee = arr.id_agence
+                INNER JOIN utilisateur u ON t.id_utilisateur = u.id_utilisateur
+                ORDER BY t.date_depart DESC";
 
-    $stmt = $this->pdo->query($sql);
-    return $stmt->fetchAll();
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll();
     }
 }

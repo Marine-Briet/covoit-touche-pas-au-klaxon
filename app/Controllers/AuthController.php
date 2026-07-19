@@ -7,12 +7,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Core\Flash;
 
-
+/**
+ * Contrôleur gérant l'authentification des utilisateurs (connexion / déconnexion).
+ *
+ * @package App\Controllers
+ */
 class AuthController
 {
-    
-    // Affiche le formulaire de connexion (GET /login)
-    
+    /**
+     * Affiche le formulaire de connexion (GET /login).
+     *
+     * @param Request $request La requête HTTP entrante
+     * @param Response $response La réponse HTTP à compléter
+     * @return Response La réponse contenant le formulaire de connexion
+     */
     public function showLoginForm(Request $request, Response $response)
     {
         ob_start();
@@ -23,9 +31,15 @@ class AuthController
         return $response;
     }
 
-    
-    // Traite la soumission du formulaire (POST /login)
-
+    /**
+     * Traite la soumission du formulaire de connexion (POST /login).
+     * Vérifie l'email et le mot de passe, ouvre la session si valide,
+     * sinon redirige vers /login avec un message d'erreur.
+     *
+     * @param Request $request La requête HTTP contenant email et mot de passe
+     * @param Response $response La réponse HTTP à compléter (redirection)
+     * @return Response La redirection vers l'accueil (succès) ou /login (échec)
+     */
     public function login(Request $request, Response $response)
     {
         $email = $request->request->get('email');
@@ -34,7 +48,7 @@ class AuthController
         $utilisateurModel = new UtilisateurModel();
         $utilisateur = $utilisateurModel->findByEmail($email);
 
-        // Vérification l'utilisateur et le mot de passe correspondant
+        // Vérification de l'utilisateur et du mot de passe correspondant
         if ($utilisateur && password_verify($motDePasse, $utilisateur['mot_de_passe'])) {
             // Connexion réussie
             $_SESSION['user'] = [
@@ -58,9 +72,13 @@ class AuthController
         return $response;
     }
 
-    
-    // Déconnexion (GET /logout)
-    
+    /**
+     * Déconnecte l'utilisateur (GET /logout) en détruisant sa session.
+     *
+     * @param Request $request La requête HTTP entrante
+     * @param Response $response La réponse HTTP à compléter (redirection)
+     * @return Response La redirection vers la page d'accueil
+     */
     public function logout(Request $request, Response $response)
     {
         unset($_SESSION['user']);
