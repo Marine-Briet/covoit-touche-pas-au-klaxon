@@ -167,7 +167,7 @@ class AdminAgenceController
         $agenceModel = new AgenceModel();
         $agenceModel->delete((int) $id);
 
-        Flash::set('success', 'L\'agence a été supprimée.');
+        Flash::set('delete', 'L\'agence a été supprimée.');
         $response->setStatusCode(302);
         $response->headers->set('Location', BASE_URL . '/admin/agences');
         return $response;

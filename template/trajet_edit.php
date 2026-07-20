@@ -91,7 +91,7 @@ $dateArriveeFormatted = (new DateTime($trajet['date_arrivee']))->format('Y-m-d\T
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="nb_places_tot" class="form-label">Nombre total de places</label>
+                        <label for="nb_places_tot" class="form-label">Nombre total de places passagers</label>
                         <input type="number" class="form-control" id="nb_places_tot" name="nb_places_tot"
                                min="1" value="<?= (int) $trajet['nb_places_tot'] ?>" required>
                     </div>

@@ -60,7 +60,7 @@ class AdminTrajetController
         $trajetModel = new TrajetModel();
         $trajetModel->delete((int) $id);
 
-        Flash::set('success', 'Le trajet a été supprimé.');
+        Flash::set('delete', 'Le trajet a été supprimé.');
         $response->setStatusCode(302);
         $response->headers->set('Location', BASE_URL . '/admin/trajets');
         return $response;
