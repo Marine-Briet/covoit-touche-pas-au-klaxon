@@ -6,11 +6,7 @@ $isAdmin = $isConnected && $_SESSION['user']['est_admin'];
 
 <div class="d-flex justify-content-between align-items-center border rounded p-3 mb-4">
 
-    <?php if ($isAdmin): ?>
-        <a href="<?= BASE_URL ?>/admin" class="h4 mb-0 text-decoration-none text-dark">Touche pas au klaxon</a>
-    <?php else: ?>
-        <h1 class="h4 mb-0">Touche pas au klaxon</h1>
-    <?php endif; ?>
+    <a href="<?= BASE_URL ?>/" class="h4 mb-0 text-decoration-none text-dark">Touche pas au klaxon</a>
 
     <div>
         <?php if ($isAdmin): ?>

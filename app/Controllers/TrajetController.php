@@ -236,7 +236,7 @@ class TrajetController
 
         $trajetModel->delete($id);
 
-        Flash::set('success', 'Le trajet a été supprimé.');
+        Flash::set('delete', 'Le trajet a été supprimé.');
         $response->setStatusCode(302);
         $response->headers->set('Location', BASE_URL . '/');
         return $response;
