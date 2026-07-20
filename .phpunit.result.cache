@@ -1,0 +1,1 @@
+{"version":2,"defects":[],"times":{"Tests\\AgenceModelTest::testInsert":0.017,"Tests\\AgenceModelTest::testUpdate":0.015,"Tests\\AgenceModelTest::testDelete":0.012,"Tests\\TrajetModelTest::testInsert":0.007,"Tests\\TrajetModelTest::testUpdate":0.012,"Tests\\TrajetModelTest::testDelete":0.014}}

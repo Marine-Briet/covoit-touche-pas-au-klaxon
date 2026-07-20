@@ -1,0 +1,7 @@
+<?php
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'touche_pas_au_klaxon_test');
+define('DB_USER', 'admin');
+define('DB_PASS', 'admin_1234');
+define('DB_CHARSET', 'utf8mb4');
+define('BASE_URL', '/covoit-touche-pas-au-klaxon/public');

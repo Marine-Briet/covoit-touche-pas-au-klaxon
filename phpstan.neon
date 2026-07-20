@@ -1,0 +1,8 @@
+parameters:
+    level: 5
+    paths:
+        - app
+        - core
+        - public
+    bootstrapFiles:
+        - config/config.php
