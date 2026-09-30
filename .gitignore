@@ -2,3 +2,6 @@
 .env
 node_modules/
 public/assets/css/
+config/config.php
+config/config.test.php
+.phpunit.result.cache
