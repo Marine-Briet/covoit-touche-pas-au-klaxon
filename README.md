@@ -4,12 +4,6 @@ An intranet carpooling application allowing employees of a multi-site company to
 
 > Fictional project built as part of the Web & Mobile Web Developer training (Centre Européen de Formation).
 
-<p align="center">
-  <img src="docs/screenshots/Home.jpg" alt="Home page with upcoming trips" width="600">
-  <img src="docs/screenshots/details.jpg" alt="Trip details modal" width="600">
-  <img src="docs/screenshots/trajets-admin.jpg" alt="Admin trip view" width="600">
-</p>
-
 ---
 
 ## 📖 About the project
@@ -17,6 +11,13 @@ An intranet carpooling application allowing employees of a multi-site company to
 The company operates several sites across France and generates many inter-site trips, often with only the driver on board. This intranet application lets employees publish the trips they have planned so that colleagues can join them, reducing the number of vehicles on the road.
 
 The application is built in **PHP without a framework**, on a custom **MVC architecture**: routing, controllers, models, templates, authentication and flash messages are all implemented by hand.
+
+
+<p align="center">
+  <img src="docs/screenshots/Home.jpg" alt="Home page with upcoming trips" width="600">
+  <img src="docs/screenshots/details.jpg" alt="Trip details modal" width="600">
+  <img src="docs/screenshots/trajets-admin.jpg" alt="Admin trip view" width="600">
+</p>
 
 ---
 
